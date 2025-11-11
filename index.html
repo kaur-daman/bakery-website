@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pal Ji Bakery - Handcrafted Perfection</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        /* CSS Styling for Pal Ji Bakery */
+
+        /* General Styling & Reset */
+        :root {
+            --primary-color: #5D4037; /* Brown Coffee */
+            --secondary-color: #FFF8E1; /* Light Cream / Vanilla */
+            --accent-color: #FFC107; /* Amber Gold */
+            --text-color-dark: #333;
+            --text-color-light: #fff;
+            --font-heading: 'Cinzel', serif;
+            --font-body: 'Open Sans', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            line-height: 1.6;
+            color: var(--text-color-dark);
+            background-color: var(--secondary-color);
+            scroll-behavior: smooth;
+        }
+
+        h1, h2, h3 {
+            font-family: var(--font-heading);
+            color: var(--primary-color);
+        }
+
+        /* Utility Classes */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .cta-button {
+            background-color: var(--accent-color);
+            color: var(--primary-color);
+            padding: 12px 30px;
+            border-radius: 50px; 
+            font-size: 1.1em;
+            font-weight: 600;
+            transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+            display: inline-block;
+            border: none;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-decoration: none;
+        }
+
+        .cta-button:hover {
+            background-color: #FFD740; 
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        /* --- Header & Navigation --- */
+        .navbar {
+            position: fixed;
+            width: 100%;
+            background-color: var(--primary-color);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+        }
+        
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+
+        .logo {
+            font-size: 2.2em;
+            color: var(--text-color-light);
+            letter-spacing: 3px;
+        }
+
+        .nav-links a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            margin-left: 30px;
+            font-weight: 400;
+            padding-bottom: 5px;
+            transition: color 0.3s, border-bottom 0.3s;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--accent-color);
+            border-bottom: 2px solid var(--accent-color);
+        }
+        
+        .menu-toggle {
+            display: none; 
+            background: none;
+            border: none;
+            color: var(--text-color-light);
+            font-size: 1.8em;
+            cursor: pointer;
+        }
+
+        /* --- Hero Section (Slideshow) --- */
+        .hero-section {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding-top: 80px; 
+            overflow: hidden;
+            background: black; /* Default black background */
+        }
+        
+        /* Slideshow Container */
+        .slideshow-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+        
+        .slide {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .slide.active-slide {
+            opacity: 1;
+        }
+        
+        /* Overlay for Readability */
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6); /* Dark overlay */
+            z-index: 1; 
+        }
+
+        .hero-content {
+            position: relative;
+            padding: 40px 60px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            color: var(--text-color-light);
+            z-index: 2; /* Text above overlay */
+        }
+
+        .hero-content h1 {
+            font-size: 4.8em;
+            color: var(--accent-color);
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.9);
+        }
+
+        .hero-content p {
+            font-size: 1.8em;
+            margin-bottom: 40px;
+            color: var(--secondary-color);
+        }
+
+        /* --- Content Sections --- */
+        .content-section {
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 3.5em;
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: 4px solid var(--accent-color);
+            display: inline-block;
+            letter-spacing: 1px;
+        }
+
+        /* --- Products Grid (Detailed Menu) --- */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            padding: 0 20px;
+            text-align: left;
+        }
+
+        .product-card {
+            background-color: var(--text-color-light);
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            border-top: 5px solid var(--primary-color);
+        }
+        
+        .card-header {
+            padding: 25px;
+            background-color: var(--primary-color);
+            color: var(--text-color-light);
+            display: flex;
+            align-items: center;
+        }
+
+        .card-header i {
+            font-size: 2em;
+            color: var(--accent-color);
+            margin-right: 15px;
+        }
+
+        .card-header h3 {
+            color: var(--text-color-light);
+            font-size: 1.8em;
+        }
+
+        .menu-list {
+            padding: 25px;
+        }
+
+        .menu-list ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .menu-list li {
+            font-size: 1.1em;
+            padding: 15px 0;
+            border-bottom: 1px dashed #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .menu-list li:last-child {
+            border-bottom: none;
+        }
+        
+        /* Product Image Thumbnail Styling */
+        .product-thumb {
+            width: 50px;
+            height: 50px;
+            border-radius: 5px;
+            object-fit: cover;
+            border: 2px solid var(--accent-color);
+            margin-left: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        /* --- Contact Section --- */
+        .contact-section {
+            background-color: var(--primary-color);
+            color: var(--text-color-light);
+        }
+
+        .contact-section h2 {
+            color: var(--accent-color);
+        }
+
+        .contact-form {
+            max-width: 700px;
+            margin: 20px auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .contact-form textarea {
+            grid-column: 1 / -1; 
+        }
+
+        .contact-form input, .contact-form textarea {
+            padding: 15px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+            font-family: var(--font-body);
+        }
+
+        .contact-form button {
+            grid-column: 1 / -1;
+            margin-top: 10px;
+        }
+
+        /* --- Responsive Design --- */
+        @media (max-width: 992px) {
+            .hero-content h1 {
+                font-size: 3.5em;
+            }
+            .hero-content p {
+                font-size: 1.5em;
+            }
+            .product-grid {
+                grid-template-columns: 1fr;
+                padding: 0 40px;
+            }
+            .contact-form {
+                grid-template-columns: 1fr;
+                max-width: 500px;
+            }
+        }
+        @media (max-width: 768px) {
+             /* Existing mobile menu CSS remains the same */
+            .hero-content h1 {
+                font-size: 2.5em;
+            }
+            .hero-content p {
+                font-size: 1.2em;
+            }
+            .product-thumb {
+                width: 40px;
+                height: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="navbar">
+        <div class="container nav-content">
+            <div class="logo">Pal Ji Bakery</div>
+            <nav class="nav-links">
+                <a href="#home" class="active">Home</a>
+                <a href="#about">Our Story</a>
+                <a href="#products">Menu</a>
+                <a href="#contact">Contact/Order</a>
+            </nav>
+            <button class="menu-toggle" aria-label="Toggle navigation menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero-section">
+            <div class="slideshow-container">
+                <div class="slide active-slide" style="background-image: url('https://png.pngtree.com/background/20230518/original/pngtree-bakery-with-many-different-types-of-items-behind-glass-picture-image_2645229.jpg');"></div>
+                <div class="slide" style="background-image: url('https://static.vecteezy.com/system/resources/previews/038/811/093/large_2x/ai-generated-beautiful-background-for-bakery-advertising-free-photo.jpeg');"></div>
+                <div class="slide" style="background-image: url('https://images.pexels.com/photos/27992331/pexels-photo-27992331.jpeg?cs=srgb&dl=pexels-jakubzerdzicki-27992331.jpg&fm=jpg');"></div>
+            </div>
+
+            <div class="hero-content">
+                <h1>Handcrafted Perfection, Baked Daily</h1>
+                <p>Taste the tradition and passion in every bite.</p>
+                <a href="#products" class="cta-button">Explore The Menu</a>
+            </div>
+        </section>
+
+        <section id="about" class="content-section">
+            <div class="container">
+                <h2>⭐ Our Sweet Commitment</h2>
+                <p>Pal Ji Bakery is more than just a shop; it's a commitment to quality. Since opening our doors, we have insisted on using premium, natural ingredients and traditional recipes. We believe that simple ingredients, handled with care and passion, create the most memorable flavors.</p>
+            </div>
+        </section>
+
+        <section id="products" class="content-section" style="background-color: #F0EAD6;">
+            <div class="container">
+                <h2>🥐 Full Product Menu</h2>
+                <p>A selection of our most popular and beloved daily bakes. Click to view details or place a custom order!</p>
+                
+                <div class="product-grid">
+                    <div class="product-card">
+                        <div class="card-header">
+                            <i class="fas fa-birthday-cake"></i>
+                            <h3>Cakes & Slices</h3>
+                        </div>
+                        <div class="menu-list">
+                            <ul>
+                                <li><span>Black Forest Cake</span><img src="https://livforcake.com/wp-content/uploads/2017/07/black-forest-cake-thumb.jpg" class="product-thumb" alt="Black Forest"></li>
+                                <li><span>Pineapple Fresh Cream</span><img src="https://i.pinimg.com/originals/ff/f4/12/fff412f84027c1a95922d456020fece4.jpg" class="product-thumb" alt="Pineapple Cake"></li>
+                                <li><span>Red Velvet Cupcakes</span><img src="http://www.yourcupofcake.com/wp-content/uploads/2013/01/Red-Velvet-Cupcakes.jpg" class="product-thumb" alt="Cupcakes"></li>
+                                <li><span>Chocolate Truffle Slice</span><img src="https://137562747.cdn6.editmysite.com/uploads/1/3/7/5/137562747/ALBCE554LFZBEN7G2VNPJLPR.jpeg" class="product-thumb" alt="Truffle Slice"></li>
+                                <li><span>Muffins (Vanilla/Choco)</span><img src="https://tse3.mm.bing.net/th/id/OIP.7vppx0Ifu6fKhEQSQo4cCQHaE8?pid=Api&P=0&h=180" class="product-thumb" alt="Muffins"></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="product-card">
+                        <div class="card-header">
+                            <i class="fas fa-bread-slice"></i>
+                            <h3>Artisan Breads</h3>
+                        </div>
+                        <div class="menu-list">
+                            <ul>
+                                <li><span>Slow-Proof Sourdough</span><img src="https://tse2.mm.bing.net/th/id/OIP.dbEtWI73P_a2lW846sup0wAAAA?pid=Api&P=0&h=180" class="product-thumb" alt="Sourdough"></li>
+                                <li><span>Classic White Loaf</span><img src="https://tse3.mm.bing.net/th/id/OIP.f4BQ52xH33kcGx0j2ebtqAHaE8?pid=Api&P=0&h=180" class="product-thumb" alt="White Loaf"></li>
+                                <li><span>Multigrain Power Bread</span><img src="https://tse2.mm.bing.net/th/id/OIP.jG3EaNvj9KOdwKqlnqbMxwHaHa?pid=Api&P=0&h=180" class="product-thumb" alt="Multigrain"></li>
+                                <li><span>Dinner Rolls (Dozen)</span><img src="https://tse1.mm.bing.net/th/id/OIP.wV9uGi9BISUvKSZrOoF0NgHaGZ?pid=Api&P=0&h=180" class="product-thumb" alt="Dinner Rolls"></li>
+                                <li><span>Garlic Focaccia</span><img src="https://daenskitchen.com/wp-content/uploads/2022/07/Rich-Glen-Focaccia-Daens-Kitchen-High-Res-3-scaled.jpg" class="product-thumb" alt="Focaccia"></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="product-card">
+                        <div class="card-header">
+                            <i class="fas fa-cookie-bite"></i>
+                            <h3>Cookies & Savories</h3>
+                        </div>
+                        <div class="menu-list">
+                            <ul>
+                                <li><span>Signature Choco Chip</span><img src="https://tse3.mm.bing.net/th/id/OIP.pQgjT1do6RM3U7GvY_22hQHaIB?pid=Api&P=0&h=180" class="product-thumb" alt="Choco Chip Cookie"></li>
+                                <li><span>Almond Butter Cookies</span><img src="https://tse4.mm.bing.net/th/id/OIP.BsKer_7oO-9l6eiG5mtZOgHaLH?pid=Api&P=0&h=180" class="product-thumb" alt="Almond Cookies"></li>
+                                <li><span>Flaky Veg Puff</span><img src="https://thebakeshop.in/wp-content/uploads/2023/04/Flaky-Veg-Puff.jpg" class="product-thumb" alt="Veg Puff"></li>
+                                <li><span>Eggless Cashew Biscuits</span><img src="https://i.ytimg.com/vi/XUgFfaTVTNw/maxresdefault.jpg" class="product-thumb" alt="Biscuits"></li>
+                                <li><span>Savory Cheese Straws</span><img src="https://tse3.mm.bing.net/th/id/OIP.sUe3Q6O9J87DLyxLQRnM8gHaHa?pid=Api&P=0&h=180" class="product-thumb" alt="Cheese Straws"></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="content-section contact-section">
+            <div class="container">
+                <h2>📝 Place Your Custom Order</h2>
+                <p>Please use the form below for all custom cake orders, bulk purchases, or special requests. We will confirm details and pricing within 24 hours.</p>
+                <form class="contact-form" onsubmit="handleFormSubmission(event)">
+                    <input type="text" placeholder="Your Name" required>
+                    <input type="email" placeholder="Your Email" required>
+                    <input type="tel" placeholder="Phone Number (Required)" required>
+                    <input type="text" placeholder="Date Needed (DD/MM/YYYY)" required>
+                    <textarea placeholder="Specific Order Details (Item, Quantity, Customizations)" rows="4" required></textarea>
+                    <button type="submit" class="cta-button">Submit Order Request</button>
+                </form>
+                <div class="address-info">
+                    <i class="fas fa-map-marker-alt"></i> 456 Sweet Street, Bakersville, 110001
+                    <br>
+                    <i class="fas fa-phone"></i> +91 98765 43210 (Call for fastest service)
+                    <br>
+                    <i class="fas fa-clock"></i> Mon - Sat: 9:00 AM - 8:00 PM
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Pal Ji Bakery | Handcrafted Perfection | All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // JavaScript for Interactivity and Functions
+        document.addEventListener('DOMContentLoaded', () => {
+            const navToggle = document.querySelector('.menu-toggle');
+            const navLinks = document.querySelector('.nav-links');
+            const links = document.querySelectorAll('.nav-links a');
+            const sections = document.querySelectorAll('section[id]');
+            const slides = document.querySelectorAll('.slide');
+            let currentSlide = 0;
+
+            // 1. Mobile Menu Toggle & Active Link Scroll (Existing Functions)
+            navToggle.addEventListener('click', () => {
+                navLinks.classList.toggle('open');
+            });
+            links.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (navLinks.classList.contains('open')) {
+                        navLinks.classList.remove('open');
+                    }
+                });
+            });
+
+            const options = { root: null, rootMargin: '0px', threshold: 0.5 };
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        links.forEach(link => link.classList.remove('active'));
+                        const activeLink = document.querySelector(`.nav-links a[href="#${entry.target.id}"]`);
+                        if (activeLink) {
+                            activeLink.classList.add('active');
+                        }
+                    }
+                });
+            }, options);
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+
+            // 2. Slideshow Functionality
+            function showSlide(n) {
+                // Hide all slides
+                slides.forEach(slide => slide.classList.remove('active-slide'));
+                
+                // Calculate the index for the next slide (circular loop)
+                currentSlide = (n + slides.length) % slides.length;
+                
+                // Show the current slide
+                slides[currentSlide].classList.add('active-slide');
+            }
+
+            function nextSlide() {
+                showSlide(currentSlide + 1);
+            }
+            
+            // Start the automatic slideshow (change every 5 seconds)
+            if (slides.length > 1) {
+                showSlide(0); // Initialize first slide
+                setInterval(nextSlide, 5000); 
+            } else if (slides.length === 1) {
+                slides[0].classList.add('active-slide');
+            }
+
+
+            // 3. Contact Form Placeholder Function
+            window.handleFormSubmission = function(event) {
+                event.preventDefault();
+                alert('Thank you for your order request! A Pal Ji Bakery staff member will contact you shortly to confirm the details. Please check your phone for a call.');
+                event.target.reset(); // Clears the form fields
+            }
+        });
+    </script>
+</body>
+</html>
